@@ -25,6 +25,16 @@ namespace WCFRestTests
             BusinessRulesTest.BusinessRules = new BusinessRules(new DatabaseEmulation());
             Ticket ticket = businessRules.GetNewTicket();
             Assert.IsTrue(ticket != null);
+            for (int i = 0; i < DatabaseEmulation.NUMBER_PARKING_PLACES - 1; i++)
+            {
+                ticket = businessRules.GetNewTicket();
+            }
+            Assert.IsTrue(ticket != null);
+
+            //Try to get ticket when no spaces left
+            ticket = businessRules.GetNewTicket();
+            Assert.IsTrue(ticket == null);
+
         }
         [TestMethod]
         public void BusinessRules_IsParkingAvailableTest()

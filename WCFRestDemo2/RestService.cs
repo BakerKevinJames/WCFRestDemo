@@ -46,7 +46,7 @@ namespace WCFRestDemo2
         {
             Checkout checkout = new Checkout();
             var businessRules = Factory.MakeInstance<IBusinessRules>("IDatabase");
-            Ticket ticket = Factory.MakeInstance<IBusinessRules>("IDatabase").TurnInTicket(id);
+            Ticket ticket = businessRules.TurnInTicket(id);
             checkout.Duration = DateTime.UtcNow - ticket.Checkin;
             checkout.Charge = businessRules.ParkingCharge(checkout.Duration);
             return checkout;           
